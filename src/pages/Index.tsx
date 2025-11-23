@@ -2,10 +2,12 @@ import { useState } from 'react';
 import { Button } from '@/components/ui/button';
 import { Card, CardContent, CardHeader, CardTitle, CardDescription } from '@/components/ui/card';
 import { Badge } from '@/components/ui/badge';
+import { Dialog, DialogContent, DialogDescription, DialogHeader, DialogTitle } from '@/components/ui/dialog';
 import Icon from '@/components/ui/icon';
 
 const Index = () => {
   const [activeSection, setActiveSection] = useState('services');
+  const [orderDialogOpen, setOrderDialogOpen] = useState(false);
 
   const services = [
     {
@@ -107,7 +109,7 @@ const Index = () => {
                 </button>
               ))}
             </div>
-            <Button className="gradient-primary text-white hover:opacity-90">
+            <Button className="gradient-primary text-white hover:opacity-90" onClick={() => setOrderDialogOpen(true)}>
               Заказать
             </Button>
           </div>
@@ -143,10 +145,10 @@ const Index = () => {
                 </div>
               </div>
               <div className="flex gap-4">
-                <Button size="lg" className="gradient-primary text-white hover:opacity-90 text-lg px-8">
+                <Button size="lg" className="gradient-primary text-white hover:opacity-90 text-lg px-8" onClick={() => setOrderDialogOpen(true)}>
                   Написать в Telegram
                 </Button>
-                <Button size="lg" variant="outline" className="border-2 border-purple-300 text-purple-700 hover:bg-purple-50">
+                <Button size="lg" variant="outline" className="border-2 border-purple-300 text-purple-700 hover:bg-purple-50" onClick={() => setOrderDialogOpen(true)}>
                   Узнать цену
                 </Button>
               </div>
@@ -205,6 +207,28 @@ const Index = () => {
             <Badge className="mb-4 bg-purple-100 text-purple-700">Партнёры</Badge>
             <h2 className="text-4xl lg:text-5xl font-bold mb-4">С какими вузами работаем</h2>
             <p className="text-xl text-gray-600">Знаем все особенности и требования</p>
+          </div>
+          <div className="mb-12">
+            <h3 className="text-2xl font-bold text-center mb-6 text-gray-800">Реальные результаты наших клиентов</h3>
+            <div className="grid md:grid-cols-2 gap-6 max-w-4xl mx-auto mb-8">
+              <div className="rounded-2xl overflow-hidden shadow-lg hover:shadow-2xl transition-shadow border-2 border-purple-200">
+                <img src="https://cdn.poehali.dev/files/5b09885b-26a6-406c-bf45-2a26f56e5b1b.jpeg" alt="Результаты тестов - 100% по всем предметам" className="w-full" />
+              </div>
+              <div className="rounded-2xl overflow-hidden shadow-lg hover:shadow-2xl transition-shadow border-2 border-purple-200">
+                <img src="https://cdn.poehali.dev/files/7ad3edd8-2b6f-4bd8-979a-8fc68616cb13.jpeg" alt="Результаты тестов - высокие баллы" className="w-full" />
+              </div>
+            </div>
+            <div className="grid md:grid-cols-3 gap-6 max-w-5xl mx-auto">
+              <div className="rounded-2xl overflow-hidden shadow-lg hover:shadow-2xl transition-shadow border-2 border-green-200">
+                <img src="https://cdn.poehali.dev/files/eb6cfff9-a69e-463c-9cb1-b2d846c75022.jpeg" alt="Оценка 5 - Бизнес-планирование" className="w-full" />
+              </div>
+              <div className="rounded-2xl overflow-hidden shadow-lg hover:shadow-2xl transition-shadow border-2 border-green-200">
+                <img src="https://cdn.poehali.dev/files/bbaad6c8-fa42-4f55-9c13-7cf5dd44ac7d.jpeg" alt="Зачет по финансовому менеджменту" className="w-full" />
+              </div>
+              <div className="rounded-2xl overflow-hidden shadow-lg hover:shadow-2xl transition-shadow border-2 border-green-200">
+                <img src="https://cdn.poehali.dev/files/46156ac6-226c-4fde-b5fe-a36e4b404442.jpeg" alt="Итоговая оценка 93,36%" className="w-full" />
+              </div>
+            </div>
           </div>
           <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
             {universities.map((uni, index) => (
@@ -272,6 +296,7 @@ const Index = () => {
                         ? 'gradient-primary text-white hover:opacity-90' 
                         : 'bg-gray-100 text-gray-800 hover:bg-gray-200'
                     }`}
+                    onClick={() => setOrderDialogOpen(true)}
                   >
                     Заказать
                   </Button>
@@ -317,13 +342,17 @@ const Index = () => {
           <h2 className="text-4xl lg:text-5xl font-bold mb-6">Готовы начать?</h2>
           <p className="text-xl mb-8 opacity-90">Напишите нам прямо сейчас и получите консультацию</p>
           <div className="flex flex-col sm:flex-row gap-4 justify-center items-center mb-12">
-            <Button size="lg" className="bg-white text-purple-600 hover:bg-gray-100 text-lg px-8">
-              <Icon name="Send" size={20} className="mr-2" />
-              Telegram: @vladislav_vv2
+            <Button size="lg" className="bg-white text-purple-600 hover:bg-gray-100 text-lg px-8" asChild>
+              <a href="https://t.me/vladislav_vv2" target="_blank" rel="noopener noreferrer">
+                <Icon name="Send" size={20} className="mr-2" />
+                Telegram: @vladislav_vv2
+              </a>
             </Button>
-            <Button size="lg" variant="outline" className="border-2 border-white text-white hover:bg-white/10 text-lg px-8">
-              <Icon name="MessageCircle" size={20} className="mr-2" />
-              VK: vk.com/id469261675
+            <Button size="lg" variant="outline" className="border-2 border-white text-white hover:bg-white/10 text-lg px-8" asChild>
+              <a href="https://vk.com/heltest" target="_blank" rel="noopener noreferrer">
+                <Icon name="MessageCircle" size={20} className="mr-2" />
+                VK: vk.com/heltest
+              </a>
             </Button>
           </div>
           <div className="grid md:grid-cols-3 gap-8 max-w-3xl mx-auto">
@@ -358,6 +387,46 @@ const Index = () => {
           <p className="text-sm text-gray-500">© 2024 StudyHelper. Все права защищены.</p>
         </div>
       </footer>
+
+      <Dialog open={orderDialogOpen} onOpenChange={setOrderDialogOpen}>
+        <DialogContent className="sm:max-w-md">
+          <DialogHeader>
+            <DialogTitle className="text-2xl font-bold text-gradient">Связаться с нами</DialogTitle>
+            <DialogDescription className="text-base">
+              Выберите удобный способ связи. Мы ответим в течение 5 минут!
+            </DialogDescription>
+          </DialogHeader>
+          <div className="flex flex-col gap-4 py-4">
+            <Button size="lg" className="gradient-primary text-white hover:opacity-90 h-16 text-lg" asChild>
+              <a href="https://t.me/vladislav_vv2" target="_blank" rel="noopener noreferrer" className="flex items-center justify-center gap-3">
+                <Icon name="Send" size={24} />
+                <div className="flex flex-col items-start">
+                  <span className="font-bold">Telegram</span>
+                  <span className="text-sm opacity-90">@vladislav_vv2</span>
+                </div>
+              </a>
+            </Button>
+            <Button size="lg" variant="outline" className="border-2 border-purple-300 text-purple-700 hover:bg-purple-50 h-16 text-lg" asChild>
+              <a href="https://vk.com/heltest" target="_blank" rel="noopener noreferrer" className="flex items-center justify-center gap-3">
+                <Icon name="MessageCircle" size={24} />
+                <div className="flex flex-col items-start">
+                  <span className="font-bold">ВКонтакте</span>
+                  <span className="text-sm opacity-90">vk.com/heltest</span>
+                </div>
+              </a>
+            </Button>
+          </div>
+          <div className="bg-purple-50 rounded-lg p-4 border border-purple-200">
+            <div className="flex items-start gap-3">
+              <Icon name="Clock" className="text-purple-600 mt-1" size={20} />
+              <div>
+                <p className="font-semibold text-purple-900 mb-1">Быстрый ответ</p>
+                <p className="text-sm text-purple-700">Отвечаем в течение 5 минут. Конфиденциальность гарантирована 🔒</p>
+              </div>
+            </div>
+          </div>
+        </DialogContent>
+      </Dialog>
     </div>
   );
 };
