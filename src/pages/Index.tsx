@@ -279,7 +279,6 @@ const Index = () => {
                 )}
                 <CardHeader className="text-center pb-8">
                   <CardTitle className="text-2xl mb-2">{plan.name}</CardTitle>
-                  <div className="text-4xl font-bold text-gradient">{plan.price}</div>
                 </CardHeader>
                 <CardContent>
                   <ul className="space-y-3 mb-6">
