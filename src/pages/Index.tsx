@@ -124,7 +124,7 @@ const Index = () => {
                 ⚡ Быстрее конкурентов в 3 раза
               </Badge>
               <h1 className="text-5xl lg:text-6xl font-bold mb-6 leading-tight">
-                Помощь студентам <span className="text-gradient">онлайн</span>
+                Помощь студентам
               </h1>
               <p className="text-xl text-gray-600 mb-8">
                 Сдадим тесты, напишем курсовые и выполним лабораторные работы. 
