@@ -1,12 +1,363 @@
-// Update this page (the content is just a fallback if you fail to update the page)
+import { useState } from 'react';
+import { Button } from '@/components/ui/button';
+import { Card, CardContent, CardHeader, CardTitle, CardDescription } from '@/components/ui/card';
+import { Badge } from '@/components/ui/badge';
+import Icon from '@/components/ui/icon';
 
 const Index = () => {
+  const [activeSection, setActiveSection] = useState('services');
+
+  const services = [
+    {
+      icon: 'CheckCircle2',
+      title: 'Онлайн-тесты',
+      description: 'Прохождение промежуточных и итоговых тестов с гарантией результата',
+      features: ['Быстрое выполнение', 'Высокие баллы', 'Отчёт о прохождении'],
+      color: 'from-purple-500 to-pink-500'
+    },
+    {
+      icon: 'FileText',
+      title: 'Курсовые работы',
+      description: 'Написание работ с учётом всех требований вашего вуза',
+      features: ['Уникальность', 'Соблюдение ГОСТов', 'Бесплатные правки'],
+      color: 'from-blue-500 to-purple-500'
+    },
+    {
+      icon: 'Flask',
+      title: 'Лабораторные',
+      description: 'Выполнение практических и лабораторных работ любой сложности',
+      features: ['Подробные отчёты', 'Расчёты', 'Графики и схемы'],
+      color: 'from-orange-500 to-pink-500'
+    },
+    {
+      icon: 'Calculator',
+      title: 'Контрольные',
+      description: 'Решение контрольных работ и расчётных заданий',
+      features: ['Все дисциплины', 'Оформление', 'Пошаговые решения'],
+      color: 'from-green-500 to-blue-500'
+    }
+  ];
+
+  const universities = [
+    { name: 'Синергия', tests: 450, rating: 4.9 },
+    { name: 'МТИ', tests: 380, rating: 4.8 },
+    { name: 'МОСАП', tests: 320, rating: 4.9 },
+    { name: 'НСПК', tests: 290, rating: 4.7 },
+    { name: 'ТУСУР', tests: 250, rating: 4.8 },
+    { name: 'Росдистант', tests: 410, rating: 4.9 }
+  ];
+
+  const pricing = [
+    {
+      name: 'Тест',
+      price: 'от 500₽',
+      features: ['Быстрое прохождение', 'Скриншоты результатов', 'Гарантия баллов'],
+      popular: false
+    },
+    {
+      name: 'Курсовая',
+      price: 'от 3000₽',
+      features: ['Уникальность 70%+', 'Все правки включены', 'Поддержка до защиты', 'Презентация в подарок'],
+      popular: true
+    },
+    {
+      name: 'Комплекс',
+      price: 'от 8000₽',
+      features: ['Все виды работ', 'Приоритет в очереди', 'Скидка 15%', 'Персональный менеджер'],
+      popular: false
+    }
+  ];
+
+  const reviews = [
+    { name: 'Анна К.', university: 'Синергия', text: 'Сдала 12 тестов на отлично! Быстро и качественно 🎉', rating: 5 },
+    { name: 'Михаил П.', university: 'МТИ', text: 'Курсовая защищена с первого раза. Спасибо за помощь!', rating: 5 },
+    { name: 'Елена С.', university: 'Росдистант', text: 'Выручили с лабораторными перед сессией. Рекомендую!', rating: 5 },
+    { name: 'Дмитрий В.', university: 'ТУСУР', text: 'Профессиональный подход, всё в срок. Буду обращаться ещё', rating: 5 }
+  ];
+
+  const scrollToSection = (section: string) => {
+    setActiveSection(section);
+    const element = document.getElementById(section);
+    element?.scrollIntoView({ behavior: 'smooth' });
+  };
+
   return (
-    <div className="min-h-screen flex items-center justify-center bg-gray-100">
-      <div className="text-center">
-        <h1 className="text-4xl font-bold mb-4 color-black text-black">Добро пожаловать!</h1>
-        <p className="text-xl text-gray-600">тут будет отображаться ваш проект</p>
-      </div>
+    <div className="min-h-screen bg-gradient-to-br from-purple-50 via-pink-50 to-blue-50">
+      <nav className="sticky top-0 z-50 bg-white/80 backdrop-blur-lg border-b border-purple-100">
+        <div className="container mx-auto px-4 py-4">
+          <div className="flex items-center justify-between">
+            <div className="flex items-center gap-2">
+              <div className="w-10 h-10 rounded-full gradient-primary flex items-center justify-center">
+                <Icon name="GraduationCap" className="text-white" size={24} />
+              </div>
+              <span className="text-2xl font-bold text-gradient">StudyHelper</span>
+            </div>
+            <div className="hidden md:flex gap-6">
+              {['services', 'universities', 'pricing', 'reviews', 'contacts'].map((section) => (
+                <button
+                  key={section}
+                  onClick={() => scrollToSection(section)}
+                  className="text-gray-700 hover:text-purple-600 transition-colors font-semibold capitalize"
+                >
+                  {section === 'services' && 'Услуги'}
+                  {section === 'universities' && 'Вузы'}
+                  {section === 'pricing' && 'Цены'}
+                  {section === 'reviews' && 'Отзывы'}
+                  {section === 'contacts' && 'Контакты'}
+                </button>
+              ))}
+            </div>
+            <Button className="gradient-primary text-white hover:opacity-90">
+              Заказать
+            </Button>
+          </div>
+        </div>
+      </nav>
+
+      <section className="py-20 px-4">
+        <div className="container mx-auto">
+          <div className="grid lg:grid-cols-2 gap-12 items-center">
+            <div className="animate-fade-in">
+              <Badge className="mb-4 bg-purple-100 text-purple-700 hover:bg-purple-200">
+                ⚡ Быстрее конкурентов в 3 раза
+              </Badge>
+              <h1 className="text-5xl lg:text-6xl font-bold mb-6 leading-tight">
+                Помощь студентам <span className="text-gradient">онлайн</span>
+              </h1>
+              <p className="text-xl text-gray-600 mb-8">
+                Сдадим тесты, напишем курсовые и выполним лабораторные работы. 
+                Работаем с 6 ведущими вузами. Гарантия качества и сроков 💪
+              </p>
+              <div className="flex flex-wrap gap-4 mb-8">
+                <div className="flex items-center gap-2 bg-white rounded-xl px-4 py-3 shadow-sm">
+                  <Icon name="CheckCircle2" className="text-green-500" size={24} />
+                  <span className="font-semibold">450+ тестов сдано</span>
+                </div>
+                <div className="flex items-center gap-2 bg-white rounded-xl px-4 py-3 shadow-sm">
+                  <Icon name="Star" className="text-yellow-500" size={24} />
+                  <span className="font-semibold">Рейтинг 4.9/5</span>
+                </div>
+                <div className="flex items-center gap-2 bg-white rounded-xl px-4 py-3 shadow-sm">
+                  <Icon name="Clock" className="text-blue-500" size={24} />
+                  <span className="font-semibold">Ответ за 5 минут</span>
+                </div>
+              </div>
+              <div className="flex gap-4">
+                <Button size="lg" className="gradient-primary text-white hover:opacity-90 text-lg px-8">
+                  Написать в Telegram
+                </Button>
+                <Button size="lg" variant="outline" className="border-2 border-purple-300 text-purple-700 hover:bg-purple-50">
+                  Узнать цену
+                </Button>
+              </div>
+            </div>
+            <div className="animate-scale-in">
+              <img 
+                src="https://cdn.poehali.dev/projects/20fc73d8-2714-4fee-b367-d29446655ebe/files/d9d207cf-195e-4740-aec9-0efc854e0c5f.jpg"
+                alt="Успешная сдача тестов"
+                className="rounded-3xl shadow-2xl"
+              />
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <section id="services" className="py-20 px-4 bg-white">
+        <div className="container mx-auto">
+          <div className="text-center mb-16 animate-fade-in">
+            <Badge className="mb-4 bg-blue-100 text-blue-700">Наши услуги</Badge>
+            <h2 className="text-4xl lg:text-5xl font-bold mb-4">Что мы предлагаем</h2>
+            <p className="text-xl text-gray-600">Полный спектр учебных услуг для вашего успеха</p>
+          </div>
+          <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-6">
+            {services.map((service, index) => (
+              <Card 
+                key={index} 
+                className="hover:shadow-xl transition-all duration-300 hover:-translate-y-2 border-2 border-transparent hover:border-purple-200 animate-slide-up"
+                style={{ animationDelay: `${index * 0.1}s` }}
+              >
+                <CardHeader>
+                  <div className={`w-14 h-14 rounded-2xl bg-gradient-to-br ${service.color} flex items-center justify-center mb-4`}>
+                    <Icon name={service.icon as any} className="text-white" size={28} />
+                  </div>
+                  <CardTitle className="text-2xl">{service.title}</CardTitle>
+                  <CardDescription className="text-base">{service.description}</CardDescription>
+                </CardHeader>
+                <CardContent>
+                  <ul className="space-y-2">
+                    {service.features.map((feature, i) => (
+                      <li key={i} className="flex items-center gap-2 text-sm">
+                        <Icon name="Check" className="text-green-500" size={16} />
+                        <span>{feature}</span>
+                      </li>
+                    ))}
+                  </ul>
+                </CardContent>
+              </Card>
+            ))}
+          </div>
+        </div>
+      </section>
+
+      <section id="universities" className="py-20 px-4">
+        <div className="container mx-auto">
+          <div className="text-center mb-16">
+            <Badge className="mb-4 bg-purple-100 text-purple-700">Партнёры</Badge>
+            <h2 className="text-4xl lg:text-5xl font-bold mb-4">С какими вузами работаем</h2>
+            <p className="text-xl text-gray-600">Знаем все особенности и требования</p>
+          </div>
+          <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
+            {universities.map((uni, index) => (
+              <Card 
+                key={index}
+                className="hover:shadow-lg transition-all hover:-translate-y-1 border-2 border-purple-100"
+              >
+                <CardContent className="pt-6">
+                  <div className="flex items-center justify-between mb-4">
+                    <h3 className="text-2xl font-bold text-gray-800">{uni.name}</h3>
+                    <div className="flex items-center gap-1 bg-yellow-100 px-3 py-1 rounded-full">
+                      <Icon name="Star" className="text-yellow-500" size={16} />
+                      <span className="font-bold text-yellow-700">{uni.rating}</span>
+                    </div>
+                  </div>
+                  <div className="flex items-center gap-2 text-gray-600">
+                    <Icon name="CheckCircle2" className="text-green-500" size={20} />
+                    <span className="font-semibold">{uni.tests}+ тестов выполнено</span>
+                  </div>
+                </CardContent>
+              </Card>
+            ))}
+          </div>
+        </div>
+      </section>
+
+      <section id="pricing" className="py-20 px-4 bg-white">
+        <div className="container mx-auto">
+          <div className="text-center mb-16">
+            <Badge className="mb-4 bg-green-100 text-green-700">Прозрачные цены</Badge>
+            <h2 className="text-4xl lg:text-5xl font-bold mb-4">Тарифы и цены</h2>
+            <p className="text-xl text-gray-600">Выберите подходящий вариант</p>
+          </div>
+          <div className="grid md:grid-cols-3 gap-8 max-w-5xl mx-auto">
+            {pricing.map((plan, index) => (
+              <Card 
+                key={index}
+                className={`relative hover:shadow-2xl transition-all ${
+                  plan.popular ? 'border-4 border-purple-500 scale-105' : 'border-2 border-gray-200'
+                }`}
+              >
+                {plan.popular && (
+                  <div className="absolute -top-4 left-1/2 -translate-x-1/2">
+                    <Badge className="gradient-primary text-white px-4 py-1">
+                      🔥 Популярно
+                    </Badge>
+                  </div>
+                )}
+                <CardHeader className="text-center pb-8">
+                  <CardTitle className="text-2xl mb-2">{plan.name}</CardTitle>
+                  <div className="text-4xl font-bold text-gradient">{plan.price}</div>
+                </CardHeader>
+                <CardContent>
+                  <ul className="space-y-3 mb-6">
+                    {plan.features.map((feature, i) => (
+                      <li key={i} className="flex items-start gap-2">
+                        <Icon name="Check" className="text-green-500 mt-1 flex-shrink-0" size={18} />
+                        <span className="text-gray-700">{feature}</span>
+                      </li>
+                    ))}
+                  </ul>
+                  <Button 
+                    className={`w-full ${
+                      plan.popular 
+                        ? 'gradient-primary text-white hover:opacity-90' 
+                        : 'bg-gray-100 text-gray-800 hover:bg-gray-200'
+                    }`}
+                  >
+                    Заказать
+                  </Button>
+                </CardContent>
+              </Card>
+            ))}
+          </div>
+        </div>
+      </section>
+
+      <section id="reviews" className="py-20 px-4">
+        <div className="container mx-auto">
+          <div className="text-center mb-16">
+            <Badge className="mb-4 bg-pink-100 text-pink-700">Отзывы</Badge>
+            <h2 className="text-4xl lg:text-5xl font-bold mb-4">Что говорят студенты</h2>
+            <p className="text-xl text-gray-600">Реальные отзывы наших клиентов</p>
+          </div>
+          <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-6">
+            {reviews.map((review, index) => (
+              <Card key={index} className="hover:shadow-lg transition-shadow border-2 border-purple-100">
+                <CardHeader>
+                  <div className="flex items-center justify-between mb-2">
+                    <CardTitle className="text-lg">{review.name}</CardTitle>
+                    <div className="flex gap-1">
+                      {[...Array(review.rating)].map((_, i) => (
+                        <Icon key={i} name="Star" className="text-yellow-500 fill-yellow-500" size={16} />
+                      ))}
+                    </div>
+                  </div>
+                  <Badge variant="outline" className="w-fit">{review.university}</Badge>
+                </CardHeader>
+                <CardContent>
+                  <p className="text-gray-600 italic">"{review.text}"</p>
+                </CardContent>
+              </Card>
+            ))}
+          </div>
+        </div>
+      </section>
+
+      <section id="contacts" className="py-20 px-4 bg-gradient-to-br from-purple-600 to-pink-600 text-white">
+        <div className="container mx-auto text-center">
+          <h2 className="text-4xl lg:text-5xl font-bold mb-6">Готовы начать?</h2>
+          <p className="text-xl mb-8 opacity-90">Напишите нам прямо сейчас и получите консультацию</p>
+          <div className="flex flex-col sm:flex-row gap-4 justify-center items-center mb-12">
+            <Button size="lg" className="bg-white text-purple-600 hover:bg-gray-100 text-lg px-8">
+              <Icon name="Send" size={20} className="mr-2" />
+              Telegram: @vladislav_vv2
+            </Button>
+            <Button size="lg" variant="outline" className="border-2 border-white text-white hover:bg-white/10 text-lg px-8">
+              <Icon name="MessageCircle" size={20} className="mr-2" />
+              VK: vk.com/id469261675
+            </Button>
+          </div>
+          <div className="grid md:grid-cols-3 gap-8 max-w-3xl mx-auto">
+            <div className="flex flex-col items-center">
+              <Icon name="Clock" size={40} className="mb-3" />
+              <h3 className="font-bold text-lg mb-2">Быстрый ответ</h3>
+              <p className="opacity-90">Отвечаем в течение 5 минут</p>
+            </div>
+            <div className="flex flex-col items-center">
+              <Icon name="Shield" size={40} className="mb-3" />
+              <h3 className="font-bold text-lg mb-2">Конфиденциально</h3>
+              <p className="opacity-90">Гарантия полной анонимности</p>
+            </div>
+            <div className="flex flex-col items-center">
+              <Icon name="ThumbsUp" size={40} className="mb-3" />
+              <h3 className="font-bold text-lg mb-2">Гарантия качества</h3>
+              <p className="opacity-90">Бесплатные правки до защиты</p>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <footer className="bg-gray-900 text-white py-8 px-4">
+        <div className="container mx-auto text-center">
+          <div className="flex items-center justify-center gap-2 mb-4">
+            <div className="w-10 h-10 rounded-full gradient-primary flex items-center justify-center">
+              <Icon name="GraduationCap" className="text-white" size={24} />
+            </div>
+            <span className="text-2xl font-bold">StudyHelper</span>
+          </div>
+          <p className="text-gray-400 mb-4">Помогаем студентам достигать успеха с 2024 года</p>
+          <p className="text-sm text-gray-500">© 2024 StudyHelper. Все права защищены.</p>
+        </div>
+      </footer>
     </div>
   );
 };
