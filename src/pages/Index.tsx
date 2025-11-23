@@ -93,19 +93,21 @@ const Index = () => {
               <span className="text-2xl font-bold text-gradient">StudyHelper</span>
             </div>
             <div className="hidden md:flex gap-6">
-              {['services', 'universities', 'pricing', 'reviews', 'contacts'].map((section) => (
-                <button
-                  key={section}
-                  onClick={() => scrollToSection(section)}
-                  className="text-gray-700 hover:text-purple-600 transition-colors font-semibold capitalize"
-                >
-                  {section === 'services' && 'Услуги'}
-                  {section === 'universities' && 'Вузы'}
-                  {section === 'pricing' && 'Цены'}
-                  {section === 'reviews' && 'Отзывы'}
-                  {section === 'contacts' && 'Контакты'}
-                </button>
-              ))}
+              <button onClick={() => scrollToSection('services')} className="text-gray-700 hover:text-purple-600 transition-colors font-semibold">
+                Услуги
+              </button>
+              <button onClick={() => scrollToSection('universities')} className="text-gray-700 hover:text-purple-600 transition-colors font-semibold">
+                Вузы
+              </button>
+              <button onClick={() => scrollToSection('pricing')} className="text-gray-700 hover:text-purple-600 transition-colors font-semibold">
+                Цены
+              </button>
+              <button onClick={() => scrollToSection('reviews')} className="text-gray-700 hover:text-purple-600 transition-colors font-semibold">
+                Отзывы
+              </button>
+              <button onClick={() => scrollToSection('contacts')} className="text-gray-700 hover:text-purple-600 transition-colors font-semibold">
+                Контакты
+              </button>
             </div>
             <Button className="gradient-primary text-white hover:opacity-90" onClick={() => setOrderDialogOpen(true)}>
               Заказать
