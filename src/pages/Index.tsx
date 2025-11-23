@@ -90,10 +90,7 @@ const Index = () => {
           <div className="flex items-center justify-between">
             <div className="flex items-center gap-3">
               <img src="https://cdn.poehali.dev/projects/20fc73d8-2714-4fee-b367-d29446655ebe/files/e142dea1-f888-4286-ab67-b30f8c352c47.jpg" alt="StudyHelper" className="w-12 h-12 rounded-full object-cover" />
-              <div className="flex flex-col">
-                <span className="text-2xl font-bold text-gradient leading-tight">StudyHelper</span>
-                <span className="text-xs text-purple-600 font-semibold">Сессия под ключ</span>
-              </div>
+              <span className="text-xs text-purple-600 font-semibold">Сессия под ключ</span>
             </div>
             <div className="hidden md:flex gap-6">
               <button onClick={() => scrollToSection('services')} className="text-gray-700 hover:text-purple-600 transition-colors font-semibold">
